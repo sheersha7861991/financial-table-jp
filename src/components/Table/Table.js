@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import './Table.css'
+
+
 const Table = () => {
 
     const assetClassColors = {
@@ -23,6 +26,8 @@ const Table = () => {
     },
     ]
     const [sortedData, setSortedData] = useState([]);
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -59,37 +64,42 @@ const Table = () => {
         setSortedData(sorted);
         setSortOrder({ ...sortOrder, [column]: order });
     };
+
     return (
-        <table data-testid="table-component">
-            <thead>
-                <tr>
-                    {tableHeaders.map((header, index) => (
-                        <th key={index}>
-                            <span onClick={() => sortData(header.key)}>
-                                {header.name}
-                                {sortOrder[header.key] === 'asc' ? ' ↑' : ' ↓'}
-                            </span>
-                        </th>
-                    ))}
-                </tr>
-            </thead>
+        <>
 
-            <tbody>
-                {sortedData.map((item, rowIndex) => (
-                    <tr key={rowIndex}>
-                        {tableHeaders.map((header, colIndex) => (
-                            <td
-                                style={{
-                                    backgroundColor: header.key === 'assetClass' ? assetClassColors[item[header.key]] : 'transparent',
-                                    color: header.key === 'price' ? (item[header.key] >= 0 ? 'black' : 'red') : 'inherit',
-                                }}
 
-                                key={colIndex}>{item[header.key]}</td>
+            <table data-testid="table-component">
+                <thead>
+                    <tr>
+                        {tableHeaders.map((header, index) => (
+                            <th key={index}>
+                                <span onClick={() => sortData(header.key)}>
+                                    {header.name}
+                                    {sortOrder[header.key] === 'asc' ? ' ↑' : ' ↓'}
+                                </span>
+                            </th>
                         ))}
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    {sortedData.map((item, rowIndex) => (
+                        <tr key={rowIndex}>
+                            {tableHeaders.map((header, colIndex) => (
+                                <td
+                                    style={{
+                                        backgroundColor: header.key === 'assetClass' ? assetClassColors[item[header.key]] : 'transparent',
+                                        color: header.key === 'price' ? (item[header.key] >= 0 ? 'black' : 'red') : 'inherit',
+                                    }}
+
+                                    key={colIndex}>{item[header.key]}</td>
+                            ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
     );
 };
 
