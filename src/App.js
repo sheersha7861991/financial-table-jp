@@ -26,12 +26,8 @@ function App() {
       <div className='mainDiv'>
         <Routes>
           <Route path="/table" element={<Table />} />
-          <Route path="/counter" element={<Counter />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/list" element={<ListEg />} />
-          <Route path="/dummy" element={<Dummy />} />
-          <Route path="/timer" element={<Timer />} />
-          <Route path="/" element={<Home />} />
+
+          <Route path="/" element={<Table />} />
 
         </Routes>
       </div>
